@@ -31,7 +31,10 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  # Print deprecation notices to the Rails logger.
+  # Set our local domain for mailers
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.
