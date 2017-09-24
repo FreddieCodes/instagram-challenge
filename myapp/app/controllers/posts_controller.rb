@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
+    @posts_sorted = Post.all.sort_by { |post| post.created_at }.reverse
   end
 
   # GET /posts/1
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
     end
 
     if @post.save
-      redirect_to root_path
+      redirect_to posts_url
     else
       redirect_to root_path, notice: @post.errors.full_messages.first
     end
@@ -74,6 +75,17 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+
+  def upvote
+    @post.liked_by current_user
+    redirect_to posts_path
+  end
+
+  def downvote
+    @post.unliked_by current_user
+    redirect_to posts_path
   end
 
   private

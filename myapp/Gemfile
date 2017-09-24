@@ -36,7 +36,10 @@ gem 'devise'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 gem 'bootstrap-sass'
-
+# likes
+gem 'acts_as_votable', '~> 0.10.0'
+# comments
+gem 'acts_as_commentable'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
