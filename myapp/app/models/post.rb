@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   acts_as_votable
+  acts_as_commentable
   mount_uploader :attachment, AvatarUploader
   validates :attachment, :presence => true
 end

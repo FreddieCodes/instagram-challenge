@@ -69,23 +69,32 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   # DELETE /posts/1.json
+
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-  
+   @post.destroy
+   respond_to do |format|
+     format.js
+     format.html { redirect_to posts_url }
+   end
+ end
+
+  # def destroy
+  #   @post.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
 
   def upvote
-    @post.liked_by current_user
-    redirect_to posts_path
+    @post.upvote_by current_user
+    redirect_to :back
   end
 
   def downvote
-    @post.unliked_by current_user
-    redirect_to posts_path
+    @post.downvote_by current_user
+    redirect_to :back
   end
 
   private
